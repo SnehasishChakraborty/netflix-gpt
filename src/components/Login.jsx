@@ -11,9 +11,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BG_IMG, USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -21,8 +21,7 @@ const Login = () => {
   const [passwordErr, setPasswordErr] = useState(null);
   const [nameErr, setNameErr] = useState(null);
   const [userErr, setUserErr] = useState(null);
-  const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const email = useRef(null);
   const password = useRef(null);
@@ -60,15 +59,20 @@ const Login = () => {
           // Signed up
           updateProfile(userCredential.user, {
             displayName: name.current.value,
-            photoURL:
-              "https://occ-0-4995-2164.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXB0aoiQ_cPt0JWiZl0WvrJxDTw4xlGexeadkJsWePx4u6yh_0PlkvzlgTEsGrHyZsEtXaLNNaThlegiRXH_0JfJgEB02mw.png?r=4ec",
+            photoURL: { USER_AVATAR },
           })
             .then(() => {
               // Profile updated!
-              const {uid, email, displayName, photoURL} = auth.currentUser
-              dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL: photoURL}))
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
               setUserErr(null);
-              navigate("/browse");
             })
             .catch((error) => {
               const errorCode = error.code;
@@ -94,7 +98,6 @@ const Login = () => {
           const user = userCredential.user;
           console.log(user);
           setUserErr(null);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -158,7 +161,7 @@ const Login = () => {
       </form>
       <img
         className="fixed top-0 left-0 w-full h-full object-cover -z-10"
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/7968847f-3da9-44b3-8bbb-13a46579881f/web/IN-en-20250609-TRIFECTA-perspective_32b70b51-20d4-46db-8a1a-3d5428be5f0e_large.jpg"
+        src={BG_IMG}
         alt=""
       />
     </>
