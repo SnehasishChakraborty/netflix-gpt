@@ -10,7 +10,7 @@ const MainContainer = () => {
   if(!nowPlayingMovies) return;
 
   const randomId = Math.floor(Math.random() * (nowPlayingMovies.length));
-  const movie = nowPlayingMovies[randomId];
+  const movie = nowPlayingMovies[5];
   const {title, overview, id} = movie;
 
   return (
