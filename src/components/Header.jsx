@@ -48,7 +48,7 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-screen px-6 py-4 bg-gradient-to-br from-black flex justify-between">
+    <div className="fixed z-30 w-screen px-6 py-4 bg-gradient-to-b from-black flex justify-between">
       <img
         className="w-44"
         src={LOGO}
@@ -58,10 +58,10 @@ const Header = () => {
         <div className="flex">
           <img className="w-12 h-12 my-2 mx-1" src={user.photoURL} alt="" />
           <div className=" my-2 mx-1">
-            <p>{user.displayName}</p>
+            <p className="text-white">{user.displayName}</p>
             <p
               onClick={handleClick}
-              className="font-bold cursor-pointer hover:underline"
+              className="font-bold text-white cursor-pointer hover:underline"
             >
               Sign Out
             </p>
